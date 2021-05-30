@@ -1,15 +1,16 @@
 import React from "react";
 
 import Icon from "@material-ui/core/Icon";
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Maps from "./components/MapView/MapView";
 import ListItems from "./components/ListItems/ListItems";
 import UpdateForm from "./components/UpdateForm/UpdateForm";
 import { useSnackbar } from "notistack";
 import { message } from "./utils/common";
 
-
 import { fetchMapData, updateStoresInfo } from "./utils/api";
 
+import feedback from "./chat.png";
 import "./app.scss";
 
 function App() {
@@ -17,12 +18,17 @@ function App() {
     isSideMenuOpen: true,
     fetchMapDataLoading: false,
     mapDataList: [],
+    feedbackClass: "feedback-img",
   });
   const { enqueueSnackbar } = useSnackbar();
 
   React.useEffect(()=>{
     handleFetchMapData();
-  }, [])
+  }, []);
+
+  React.useEffect(()=>{
+    animateFeedback()
+  },[state.feedbackClass])
 
   const handleFetchMapData = async () => {
     setState(state => ({ ...state, fetchMapDataLoading: true }));
@@ -62,8 +68,30 @@ function App() {
     handleUpdateMapData(val)
   };
 
+  const animateFeedback = () => {
+    setTimeout(()=>{
+      if(state.feedbackClass === "feedback-img"){
+        setState(state => ({ ...state, feedbackClass: "feedback-img-with-scaled" }));
+      }else{
+        setState(state => ({ ...state, feedbackClass: "feedback-img" }));
+      }
+    }, 2000);
+  };
+ 
+  const openFeedback = (e) => {
+    e.stopPropagation()
+    window.open("https://docs.google.com/forms/d/e/1FAIpQLSdO9A9-LVmdGM5cgIHw7N_G4pZvhrtPTmYop0fPy6eNBmJwrQ/viewform", "_blank")
+  };
+
   return (
     <div className="App">
+      <div 
+        className="feedback" 
+        onClick={openFeedback}
+        >
+        <img src={feedback} className={state.feedbackClass} alt="feedback"/>
+        <p>使用者回饋表單</p>
+      </div>
       <div className={state.isSideMenuOpen ? "side-menu-open" : "side-menu-close"}>
         { state.isSideMenuOpen &&
           <>
