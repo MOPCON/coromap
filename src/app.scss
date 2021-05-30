@@ -17,15 +17,15 @@
         align-items: center;
     
         .feedback-img-with-scaled{
-            width: 75px;
-            height: 75px;
+            width: 60px;
+            height: 60px;
             transition: transform 330ms ease-in;
             cursor: pointer;
         }
 
         .feedback-img{
-            width: 75px;
-            height: 75px;
+            width: 60px;
+            height: 60px;
             transform: scale(0.9);
             transition: transform 330ms ease-in;
             cursor: pointer;
