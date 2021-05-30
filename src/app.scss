@@ -20,6 +20,7 @@
             width: 75px;
             height: 75px;
             transition: transform 330ms ease-in;
+            cursor: pointer;
         }
 
         .feedback-img{
@@ -27,6 +28,7 @@
             height: 75px;
             transform: scale(0.9);
             transition: transform 330ms ease-in;
+            cursor: pointer;
         }
 
         >p{
