@@ -21,6 +21,14 @@
     .MuiCollapse-container{
         .MuiCollapse-wrapper{
             .MuiCollapse-wrapperInner{
+                // scroll-hint
+                background-image: linear-gradient(to top, #282c34, #282c34), linear-gradient(to top, #282c34, #282c34), linear-gradient(to top, rgba(110, 110, 110, 0.25), rgba(255, 255, 255, 0)), linear-gradient(to bottom, rgba(110, 110, 110, 0.25), rgba(255, 255, 255, 0));
+                background-position: bottom center, top center, bottom center, top center;
+                /* background-color: white; */
+                background-repeat: no-repeat;
+                background-size: 100% 20px, 100% 20px, 100% 20px, 100% 20px;
+                background-attachment: local, local, scroll, scroll;
+                // scroll-hint-end
                 height: 60vh;
                 overflow-y: scroll;
                 

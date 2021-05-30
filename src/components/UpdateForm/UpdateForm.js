@@ -55,12 +55,12 @@ const UpdateForm = props => {
     };
 
     const handleFetchLatAndLong = (url) => {
-        if(url.split("/").length > 0 && url.indexOf("@") > -1){
-            const urlArr = url.split("/");
-            setState(state => ({ ...state, name: decodeURIComponent(urlArr[5]) }));
-            if (urlArr[6]) {
-                setState(state => ({ ...state, latitude: urlArr[6].split(",")[0].replace("@", ""), longitude: urlArr[6].split(",")[1] }));
-            }
+        if((url.split("/").length > 0 && url.indexOf("@") > -1) || url.includes('goo.gl/maps') || url.includes('g.page')) {
+            // const urlArr = url.split("/");
+            // setState(state => ({ ...state, name: decodeURIComponent(urlArr[5]) }));
+            // if (urlArr[6]) {
+            //     setState(state => ({ ...state, latitude: urlArr[6].split(",")[0].replace("@", ""), longitude: urlArr[6].split(",")[1] }));
+            // }
         }else{
             message( enqueueSnackbar, "請輸入有效的 Google Map 連結。", "error");
             // return
@@ -70,7 +70,7 @@ const UpdateForm = props => {
     const handleUpdateStoreInfo = () => {
         const { 
             googleMapUrl, 
-            name, 
+            // name, 
             discountService, 
             seatAdjustment, 
             openingHoursAdjustment, 
@@ -81,15 +81,15 @@ const UpdateForm = props => {
             complementarySeat, 
             complementaryFlat, 
             complementaryWashroom,
-            latitude,
-            longitude
+            // latitude,
+            // longitude
         } = state;
         if (!googleMapUrl) {
             message( enqueueSnackbar, "請輸入有效的 Google Map 連結。", "error");
             return
         };
-        if(!latitude) return
-        if(!longitude) return
+        // if(!latitude) return
+        // if(!longitude) return
 
         let complementary = "";
         if(complementarySeat){
@@ -102,10 +102,10 @@ const UpdateForm = props => {
 
         const updateData = {
             "url": googleMapUrl,
-            "latitude": latitude ,
-            "longitude": longitude,
+            // "latitude": latitude ,
+            // "longitude": longitude,
             "inside_status": seatAdjustment,
-            "shop_name": name,
+            // "shop_name": name,
             "prevention_measures": complementary,
             "inside": forHere,
             "outside": toGo,
@@ -126,7 +126,7 @@ const UpdateForm = props => {
             </div>
             <Collapse in={state.isContainerOpen}>
                 <TextField label="Google map Url" onChange={handleUpdateFiled} name="googleMapUrl" value={state.googleMapUrl} />
-                <TextField label="店家名稱" onChange={handleUpdateFiled} name="name" value={state.name} />
+                {/* <TextField label="店家名稱" onChange={handleUpdateFiled} name="name" value={state.name} /> */}
                 <TextField label="防疫外帶或外送優惠服務" onChange={handleUpdateFiled} name="discountService" value={state.discountService} />
                 <TextField label="內用座位調整情況" onChange={handleUpdateFiled} name="seatAdjustment" value={state.seatAdjustment} />
                 <TextField label="營業時間調整情況" onChange={handleUpdateFiled} name="openingHoursAdjustment" value={state.openingHoursAdjustment} />
